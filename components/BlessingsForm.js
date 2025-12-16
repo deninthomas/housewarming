@@ -26,9 +26,9 @@ export default function BlessingsForm({ token, onBlessingSubmitted }) {
     };
 
     return (
-        <section className="py-12 px-4 bg-secondary/30">
+        <section className="py-12 px-4 bg-sand-light/50 border-t border-gold-light">
             <div className="max-w-md mx-auto">
-                <h2 className="text-2xl font-bold text-center text-primary mb-6">Send Your Blessings</h2>
+                <h2 className="text-2xl font-bold text-center text-gold-dark mb-6">Send Your Blessings</h2>
 
                 {submitted ? (
                     <motion.div
@@ -39,14 +39,14 @@ export default function BlessingsForm({ token, onBlessingSubmitted }) {
                         <p className="font-semibold">Thank you for your warm wishes!</p>
                     </motion.div>
                 ) : (
-                    <form onSubmit={handleSubmit} className="space-y-4 bg-white p-6 rounded-xl shadow-sm">
+                    <form onSubmit={handleSubmit} className="space-y-4 bg-white p-6 rounded-xl shadow-sm border border-gold-light">
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
                             <input
                                 type="text"
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
-                                className="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-primary focus:outline-none"
+                                className="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-gold focus:outline-none border-gray-300"
                                 placeholder="Enter your name"
                                 required
                             />
@@ -56,14 +56,14 @@ export default function BlessingsForm({ token, onBlessingSubmitted }) {
                             <textarea
                                 value={message}
                                 onChange={(e) => setMessage(e.target.value)}
-                                className="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-primary focus:outline-none h-32"
+                                className="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-gold focus:outline-none h-32 border-gray-300"
                                 placeholder="Write your blessings..."
                                 required
                             />
                         </div>
                         <button
                             type="submit"
-                            className="w-full py-3 bg-primary text-white rounded-md font-semibold hover:bg-blue-800 transition"
+                            className="w-full py-3 bg-gold text-white rounded-md font-semibold hover:bg-gold-dark transition"
                         >
                             Send Blessings
                         </button>

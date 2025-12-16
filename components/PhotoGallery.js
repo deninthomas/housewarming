@@ -10,7 +10,7 @@ const photos = [
 export default function PhotoGallery() {
     return (
         <section className="py-12 px-4 bg-white">
-            <h2 className="text-2xl font-bold text-center text-primary mb-8">Our New Home</h2>
+            <h2 className="text-2xl font-bold text-center text-gold-dark mb-8">Our New Home</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto">
                 {photos.map((src, index) => (
                     <motion.div

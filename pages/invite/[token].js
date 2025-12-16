@@ -54,7 +54,7 @@ export default function InvitePage() {
     if (loading) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-white">
-                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-600"></div>
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gold-dark"></div>
             </div>
         );
     }
@@ -63,7 +63,7 @@ export default function InvitePage() {
         <>
             {showSplash && <SplashScreen onComplete={() => setShowSplash(false)} />}
 
-            <div className="min-h-screen bg-gray-50 font-sans">
+            <div className="min-h-screen bg-sand-light font-sans">
                 <Head>
                     <title>House Warming Ceremony</title>
                     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -73,17 +73,17 @@ export default function InvitePage() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.8, delay: showSplash ? 3.5 : 0 }}
-                    className="max-w-md mx-auto bg-white shadow-xl overflow-hidden md:max-w-2xl md:rounded-2xl md:my-8"
+                    className="max-w-md mx-auto bg-white shadow-xl overflow-hidden md:max-w-2xl md:rounded-2xl md:my-8 border-2 border-gold-light"
                 >
                     {/* Hero Section */}
                     <HeroSlider />
 
-                    <div className="px-6 py-8 text-center">
+                    <div className="px-6 py-8 text-center bg-white">
                         <motion.h1
                             initial={{ y: 20, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
                             transition={{ delay: 0.2 }}
-                            className="text-3xl font-bold text-primary mb-2"
+                            className="text-3xl font-bold text-gold-dark mb-2"
                         >
                             House Warming Ceremony
                         </motion.h1>
@@ -102,7 +102,7 @@ export default function InvitePage() {
                                 initial={{ scale: 0.9, opacity: 0 }}
                                 animate={{ scale: 1, opacity: 1 }}
                                 transition={{ delay: 0.4 }}
-                                className="bg-blue-50 p-4 rounded-lg mb-8 italic text-blue-800"
+                                className="bg-sand-light border border-gold-light p-4 rounded-lg mb-8 italic text-gold-dark"
                             >
                                 "{inviteData.customGreeting}"
                             </motion.div>
@@ -117,7 +117,7 @@ export default function InvitePage() {
 
                     <BlessingsForm token={token} />
 
-                    <footer className="bg-primary text-white py-6 text-center text-sm">
+                    <footer className="bg-gold text-white py-6 text-center text-sm">
                         <p>&copy; 2025 Vishal & Family</p>
                         <p className="mt-1 opacity-75">We await your presence</p>
                     </footer>

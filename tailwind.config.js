@@ -17,6 +17,16 @@ module.exports = {
         },
         extend: {
             colors: {
+                gold: {
+                    DEFAULT: "#f5ce6a",
+                    light: "#f9e2a6",
+                    dark: "#b89028",
+                },
+                sand: {
+                    DEFAULT: "#f4ebd0",
+                    light: "#fdfcf5",
+                    dark: "#d8caaf",
+                },
                 border: "hsl(var(--border))",
                 input: "hsl(var(--input))",
                 ring: "hsl(var(--ring))",
@@ -69,6 +79,10 @@ module.exports = {
             animation: {
                 "accordion-down": "accordion-down 0.2s ease-out",
                 "accordion-up": "accordion-up 0.2s ease-out",
+            },
+            fontFamily: {
+                script: ["Great Vibes", "cursive"],
+                serif: ["Playfair Display", "serif"],
             },
         },
     },
