@@ -4,7 +4,7 @@ import Head from 'next/head';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Copy, Share2, LogOut, MessageSquare, Smartphone, Check } from 'lucide-react';
+import { Copy, Share2, LogOut, MessageSquare, Smartphone, Check, Trash2 } from 'lucide-react';
 
 export default function AdminVishal() {
     const [guestName, setGuestName] = useState('');
@@ -70,6 +70,20 @@ export default function AdminVishal() {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ allow: !currentValue })
+            });
+            if (res.ok) {
+                fetchInvites();
+            }
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
+    const deleteInvite = async (token) => {
+        if (!window.confirm('Are you sure you want to delete this invite?')) return;
+        try {
+            const res = await fetch(`/api/admin/invite/${token}/delete`, {
+                method: 'DELETE',
             });
             if (res.ok) {
                 fetchInvites();
@@ -176,29 +190,37 @@ export default function AdminVishal() {
                                     >
                                         <Share2 size={16} /> Share
                                     </Button>
+                                    <Button
+                                        onClick={() => deleteInvite(invite.token)}
+                                        className="flex gap-2 bg-red-500 hover:bg-red-600 text-white"
+                                    >
+                                        <Trash2 size={16} /> Delete
+                                    </Button>
                                 </div>
                             </div>
 
                             {/* Blessings Section */}
-                            {invite.blessings && invite.blessings.length > 0 && (
-                                <div className="bg-gray-50 p-4 border-t">
-                                    <h4 className="text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
-                                        <MessageSquare size={16} /> Blessings Received ({invite.blessings.length})
-                                    </h4>
-                                    <div className="space-y-3">
-                                        {invite.blessings.map((blessing, idx) => (
-                                            <div key={idx} className="bg-white p-3 rounded border text-sm">
-                                                <p className="text-gray-800 italic">"{blessing.message}"</p>
-                                                <p className="text-gray-500 text-xs mt-1">- {blessing.name}</p>
-                                            </div>
-                                        ))}
+                            {
+                                invite.blessings && invite.blessings.length > 0 && (
+                                    <div className="bg-gray-50 p-4 border-t">
+                                        <h4 className="text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
+                                            <MessageSquare size={16} /> Blessings Received ({invite.blessings.length})
+                                        </h4>
+                                        <div className="space-y-3">
+                                            {invite.blessings.map((blessing, idx) => (
+                                                <div key={idx} className="bg-white p-3 rounded border text-sm">
+                                                    <p className="text-gray-800 italic">"{blessing.message}"</p>
+                                                    <p className="text-gray-500 text-xs mt-1">- {blessing.name}</p>
+                                                </div>
+                                            ))}
+                                        </div>
                                     </div>
-                                </div>
-                            )}
+                                )
+                            }
                         </Card>
                     ))}
                 </div>
             </div>
-        </div>
+        </div >
     );
 }
