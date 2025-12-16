@@ -25,44 +25,27 @@ export default async function handler(req, res) {
 
         const cookieToken = req.cookies.invite_token;
 
-        // If already used
-        if (invite.isUsed) {
-            // Allow if cookie matches the token OR if multi-device access is allowed
-            if (cookieToken === token || invite.allowMultipleDevices) {
-                res.status(200).json({
-                    name: invite.guestName,
-                    customGreeting: invite.customGreeting,
-                    message: 'Welcome back!',
-                    blessings: invite.blessings
-                });
-                return;
-            }
-            // Deny otherwise
-            res.status(403).json({ error: 'Token already used' });
-            return;
-        }
-
+        // Always allow access if token exists and not expired
+        // No "already used" restriction
         if (invite.expiresAt && new Date() > invite.expiresAt) {
             res.status(403).json({ error: 'Token expired' });
             return;
         }
 
-        // Mark as used
-        invite.isUsed = true;
-        await invite.save();
-
-        // Set cookie for re-entry (30 days)
-        const cookie = serialize('invite_token', token, {
-            httpOnly: true,
-            maxAge: 30 * 24 * 60 * 60 * 1000,
-            path: '/',
-        });
-        res.setHeader('Set-Cookie', cookie);
+        // Set cookie for re-entry (30 days) if not already set
+        if (!cookieToken) {
+            const cookie = serialize('invite_token', token, {
+                httpOnly: true,
+                maxAge: 30 * 24 * 60 * 60 * 1000,
+                path: '/',
+            });
+            res.setHeader('Set-Cookie', cookie);
+        }
 
         res.status(200).json({
             name: invite.guestName,
             customGreeting: invite.customGreeting,
-            message: 'Invite valid',
+            message: invite.isUsed ? 'Welcome back!' : 'Invite valid',
             blessings: invite.blessings
         });
     } catch (error) {
