@@ -1,0 +1,120 @@
+.container {
+  min-height: 100vh;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Inter', sans-serif;
+  color: #1e40af;
+  padding: 20px;
+}
+
+.card {
+  width: 100%;
+  max-width: 480px;
+  background: white;
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(30, 64, 175, 0.1);
+  overflow: hidden;
+  animation: fadeIn 1s ease-out;
+}
+
+.hero {
+  width: 100%;
+  height: 250px;
+  background-color: #e0f2fe;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.houseImage {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-top: 20px;
+}
+
+.content {
+  padding: 32px 24px;
+  text-align: center;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #1e40af;
+}
+
+.subtitle {
+  font-size: 16px;
+  color: #64748b;
+  margin-bottom: 24px;
+}
+
+.timerContainer {
+  display: flex;
+  justify-content: space-between;
+  margin: 32px 0;
+  padding: 20px;
+  background: #f0f9ff;
+  border-radius: 16px;
+}
+
+.timerItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.timerValue {
+  font-size: 24px;
+  font-weight: 800;
+  color: #1e40af;
+}
+
+.timerLabel {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #64748b;
+  margin-top: 4px;
+}
+
+.details {
+  text-align: left;
+  margin-top: 32px;
+  padding-top: 32px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.detailRow {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  font-size: 16px;
+  color: #334155;
+}
+
+.icon {
+  margin-right: 12px;
+  font-size: 20px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.accessDenied {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  color: #ef4444;
+}
