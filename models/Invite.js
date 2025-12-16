@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const InviteSchema = new mongoose.Schema({
     token: {
@@ -33,4 +33,4 @@ const InviteSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.models.Invite || mongoose.model('Invite', InviteSchema);
+export default mongoose.models.Invite || mongoose.model('Invite', InviteSchema);

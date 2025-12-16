@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import { serialize } from 'cookie';
-import Invite from '../../../models/Invite';
+import Invite from '@/models/Invite';
 
 export default async function handler(req, res) {
     if (req.method !== 'GET') {
