@@ -4,7 +4,7 @@ const photos = [
     '/uploads/house.jpg',
     '/uploads/living.jpg',
     '/uploads/kitchen.jpg',
-    // '/uploads/puja.jpg'
+    '/uploads/houseing.jpg'
 ];
 
 export default function PhotoGallery() {
