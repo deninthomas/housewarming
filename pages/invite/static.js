@@ -44,7 +44,7 @@ const staggerContainer = {
 const ScrollSection = ({ children, className, variant = "fadeUp", delay = 0 }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  
+
   return (
     <motion.div
       ref={ref}
@@ -52,7 +52,7 @@ const ScrollSection = ({ children, className, variant = "fadeUp", delay = 0 }) =
       animate={isInView ? "visible" : "hidden"}
       variants={{
         hidden: scrollVariants[variant].hidden,
-        visible: { 
+        visible: {
           ...scrollVariants[variant].visible,
           transition: { ...scrollVariants[variant].visible.transition, delay }
         }
@@ -72,7 +72,7 @@ const ParallaxSection = ({ children, className, speed = 0.5 }) => {
     offset: ["start end", "end start"]
   });
   const y = useTransform(scrollYProgress, [0, 1], [100 * speed, -100 * speed]);
-  
+
   return (
     <motion.div ref={ref} style={{ y }} className={className}>
       {children}
@@ -126,7 +126,7 @@ const SplashScreen = ({ onComplete }) => {
           {/* Decorative Elements */}
           <div className="absolute top-0 left-0 w-64 h-64 bg-white/20 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
           <div className="absolute bottom-0 right-0 w-96 h-96 bg-gold-dark/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
-          
+
           {/* Floating particles */}
           {[...Array(15)].map((_, i) => (
             <motion.div
@@ -248,22 +248,22 @@ const Countdown = ({ targetDate }) => {
       <div className="relative group cursor-default">
         {/* Hover glow */}
         <div className="absolute -inset-2 bg-gold/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-        
+
         {/* Main card */}
         <div className="relative w-20 h-24 sm:w-24 sm:h-28 bg-white rounded-2xl shadow-lg border border-gold-light/40 flex items-center justify-center overflow-hidden group-hover:border-gold/60 transition-colors duration-300">
           {/* Top shine */}
           <div className="absolute top-0 left-0 right-0 h-1/2 bg-gradient-to-b from-gold-light/10 to-transparent" />
-          
+
           {/* Number */}
           <span className="relative text-4xl sm:text-5xl font-bold text-gold-dark tabular-nums">
             {String(value).padStart(2, '0')}
           </span>
-          
+
           {/* Bottom shadow line */}
           <div className="absolute bottom-0 left-2 right-2 h-px bg-gradient-to-r from-transparent via-gold/20 to-transparent" />
         </div>
       </div>
-      
+
       {/* Label */}
       <span className="mt-3 text-xs sm:text-sm font-semibold text-gold-dark uppercase tracking-[0.15em]">
         {label}
@@ -272,14 +272,14 @@ const Countdown = ({ targetDate }) => {
   );
 
   const Colon = () => (
-    <div className="flex flex-col items-center justify-center gap-3 mx-2 sm:mx-4 mb-8">
+    <div className="flex flex-col items-center justify-center gap-3 mx-2 sm:mx-4 mt-8 sm:mt-10">
       <div className="w-2 h-2 rounded-full bg-gold-dark/60" />
       <div className="w-2 h-2 rounded-full bg-gold-dark/60" />
     </div>
   );
 
   return (
-    <motion.div 
+    <motion.div
       className="relative py-6"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -302,7 +302,7 @@ const Countdown = ({ targetDate }) => {
 // Animated text reveal component
 const AnimatedText = ({ text, className, delay = 0 }) => {
   const words = text.split(' ');
-  
+
   return (
     <motion.span className={className}>
       {words.map((word, wordIndex) => (
@@ -339,7 +339,7 @@ const ImageCarousel = ({ images }) => {
   }, [images.length, isHovered]);
 
   return (
-    <motion.div 
+    <motion.div
       className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden group"
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
@@ -348,7 +348,7 @@ const ImageCarousel = ({ images }) => {
     >
       {/* Border glow */}
       <div className="absolute -inset-1 bg-gradient-to-r from-gold via-gold-dark to-gold rounded-2xl opacity-30 blur-sm group-hover:opacity-50 transition-opacity duration-500" />
-      
+
       <div className="relative w-full h-full rounded-2xl overflow-hidden border-2 border-gold-light">
         <AnimatePresence mode="wait">
           <motion.div
@@ -359,7 +359,7 @@ const ImageCarousel = ({ images }) => {
             transition={{ duration: 0.7 }}
             className="absolute inset-0"
           >
-            <div 
+            <div
               className="w-full h-full bg-cover bg-center"
               style={{ backgroundImage: `url(${images[currentIndex].src})` }}
             />
@@ -368,7 +368,7 @@ const ImageCarousel = ({ images }) => {
         </AnimatePresence>
 
         {/* Coming Soon Overlay */}
-        <motion.div 
+        <motion.div
           className="absolute inset-0 flex items-center justify-center"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -380,7 +380,7 @@ const ImageCarousel = ({ images }) => {
             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
           >
             <div className="relative bg-white/90 backdrop-blur-md px-8 py-4 rounded-xl border border-gold shadow-xl">
-              <motion.p 
+              <motion.p
                 className="text-gold-dark text-sm uppercase tracking-[0.2em] mb-1 font-medium"
                 animate={{ opacity: [0.6, 1, 0.6] }}
                 transition={{ duration: 2, repeat: Infinity }}
@@ -398,11 +398,10 @@ const ImageCarousel = ({ images }) => {
             <motion.button
               key={index}
               onClick={() => setCurrentIndex(index)}
-              className={`h-2 rounded-full transition-all duration-300 ${
-                index === currentIndex 
-                  ? 'bg-gold w-6' 
+              className={`h-2 rounded-full transition-all duration-300 ${index === currentIndex
+                  ? 'bg-gold w-6'
                   : 'bg-white/60 w-2 hover:bg-white'
-              }`}
+                }`}
               whileHover={{ scale: 1.2 }}
               whileTap={{ scale: 0.9 }}
               aria-label={`Go to slide ${index + 1}`}
@@ -422,30 +421,30 @@ const HeroSection = () => {
     target: heroRef,
     offset: ["start start", "end start"]
   });
-  
+
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   return (
-    <motion.section 
+    <motion.section
       ref={heroRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
     >
       {/* Background Image with Parallax - Building */}
-      <motion.div 
+      <motion.div
         className="absolute inset-0 z-0"
         style={{ y }}
       >
-        <div 
+        <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url('/uploads/building.jpg')` }}
         />
-        <motion.div 
+        <motion.div
           className="absolute inset-0"
-          animate={{ 
-            background: isHovered 
+          animate={{
+            background: isHovered
               ? 'linear-gradient(to bottom, rgba(245, 206, 106, 0.75), rgba(244, 235, 208, 0.85), rgba(253, 252, 245, 1))'
               : 'linear-gradient(to bottom, rgba(245, 206, 106, 0.8), rgba(244, 235, 208, 0.9), rgba(253, 252, 245, 1))'
           }}
@@ -457,7 +456,7 @@ const HeroSection = () => {
       <FloatingParticles />
 
       {/* Content */}
-      <motion.div 
+      <motion.div
         className="relative z-10 text-center px-4 max-w-4xl mx-auto"
         style={{ opacity }}
       >
@@ -468,12 +467,12 @@ const HeroSection = () => {
           animate={{ scale: 1, rotate: 0 }}
           transition={{ type: 'spring', stiffness: 100, delay: 0.2 }}
         >
-          <motion.div 
+          <motion.div
             className="relative inline-block"
             animate={{ y: [0, -8, 0] }}
             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
           >
-            <motion.div 
+            <motion.div
               className="absolute -inset-4 bg-gold/30 rounded-full blur-xl"
               animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
               transition={{ duration: 2, repeat: Infinity }}
@@ -486,7 +485,7 @@ const HeroSection = () => {
 
         {/* Welcome text - Animated reveal */}
         <div className="mb-6 overflow-hidden">
-          <AnimatedText 
+          <AnimatedText
             text="You're Cordially Invited"
             className="text-gold-dark text-lg sm:text-xl tracking-[0.2em] uppercase font-medium"
             delay={0.4}
@@ -494,20 +493,20 @@ const HeroSection = () => {
         </div>
 
         {/* Main title */}
-        <motion.h1 
+        <motion.h1
           className="text-4xl sm:text-6xl md:text-7xl font-serif font-bold mb-6 leading-tight"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
         >
-          <motion.span 
+          <motion.span
             className="block text-gold-dark"
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.3 }}
           >
             House Warming
           </motion.span>
-          <motion.span 
+          <motion.span
             className="block text-gray-800 mt-2"
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.3 }}
@@ -517,7 +516,7 @@ const HeroSection = () => {
         </motion.h1>
 
         {/* Subtitle */}
-        <motion.p 
+        <motion.p
           className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto mb-10 leading-relaxed font-serif italic"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -546,7 +545,7 @@ const HeroSection = () => {
         </motion.div>
 
         {/* Scroll indicator */}
-        <motion.div 
+        <motion.div
           className="absolute bottom-10 left-1/2 -translate-x-1/2"
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
@@ -563,7 +562,7 @@ const HeroSection = () => {
 
 // Info Card Component
 const InfoCard = ({ icon: Icon, title, children, delay = 0 }) => (
-  <motion.div 
+  <motion.div
     className="relative group"
     initial={{ opacity: 0, y: 30 }}
     whileInView={{ opacity: 1, y: 0 }}
@@ -573,7 +572,7 @@ const InfoCard = ({ icon: Icon, title, children, delay = 0 }) => (
   >
     <div className="absolute -inset-1 bg-gradient-to-r from-gold to-gold-dark rounded-2xl blur opacity-10 group-hover:opacity-25 transition duration-500" />
     <div className="relative bg-white p-8 rounded-2xl border border-gold-light shadow-lg h-full">
-      <motion.div 
+      <motion.div
         className="w-14 h-14 rounded-full bg-gold-light flex items-center justify-center mb-5"
         whileHover={{ rotate: 10, scale: 1.1 }}
         transition={{ type: 'spring', stiffness: 300, damping: 15 }}
@@ -607,7 +606,7 @@ export default function InvitePage() {
   return (
     <>
       {showSplash && <SplashScreen onComplete={() => setShowSplash(false)} />}
-      
+
       <div className="min-h-screen bg-sand-light text-gray-800">
         <Head>
           <title>House Warming Ceremony | You're Invited!</title>
@@ -622,10 +621,10 @@ export default function InvitePage() {
           {/* Countdown Section */}
           <section className="relative py-20 bg-white overflow-hidden">
             <FloatingParticles />
-            
+
             <div className="relative z-10 max-w-5xl mx-auto px-4">
               <ScrollSection variant="fadeDown" className="text-center mb-12">
-                <motion.span 
+                <motion.span
                   className="text-gold-dark text-sm uppercase tracking-[0.2em] mb-4 block font-medium"
                   initial={{ opacity: 0, letterSpacing: '0' }}
                   whileInView={{ opacity: 1, letterSpacing: '0.2em' }}
@@ -634,7 +633,7 @@ export default function InvitePage() {
                 >
                   Mark Your Calendar
                 </motion.span>
-                <motion.h2 
+                <motion.h2
                   className="text-3xl sm:text-4xl font-serif font-bold text-gray-800 mb-4"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -643,7 +642,7 @@ export default function InvitePage() {
                 >
                   Counting Down to the Big Day
                 </motion.h2>
-                <motion.div 
+                <motion.div
                   className="w-20 h-1 bg-gradient-to-r from-gold to-gold-dark mx-auto rounded-full"
                   initial={{ scaleX: 0 }}
                   whileInView={{ scaleX: 1 }}
@@ -662,7 +661,7 @@ export default function InvitePage() {
           <section className="relative py-20 bg-sand-light overflow-hidden">
             <div className="max-w-4xl mx-auto px-4">
               <ScrollSection variant="fadeUp" className="text-center mb-12">
-                <motion.span 
+                <motion.span
                   className="text-gold-dark text-sm uppercase tracking-[0.2em] mb-4 block font-medium"
                   initial={{ opacity: 0, x: -30 }}
                   whileInView={{ opacity: 1, x: 0 }}
@@ -671,7 +670,7 @@ export default function InvitePage() {
                 >
                   Sneak Peek
                 </motion.span>
-                <motion.h2 
+                <motion.h2
                   className="text-3xl sm:text-4xl font-serif font-bold text-gray-800 mb-4"
                   initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
@@ -680,7 +679,7 @@ export default function InvitePage() {
                 >
                   Our New Home
                 </motion.h2>
-                <motion.div 
+                <motion.div
                   className="w-20 h-1 bg-gradient-to-r from-gold to-gold-dark mx-auto rounded-full"
                   initial={{ scaleX: 0 }}
                   whileInView={{ scaleX: 1 }}
@@ -706,10 +705,10 @@ export default function InvitePage() {
           {/* Venue & Contact Section */}
           <section className="relative py-20 bg-white overflow-hidden">
             <FloatingParticles />
-            
+
             <div className="relative z-10 max-w-5xl mx-auto px-4">
               <ScrollSection variant="fadeUp" className="text-center mb-12">
-                <motion.span 
+                <motion.span
                   className="text-gold-dark text-sm uppercase tracking-[0.2em] mb-4 block font-medium"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -718,7 +717,7 @@ export default function InvitePage() {
                 >
                   Event Details
                 </motion.span>
-                <motion.h2 
+                <motion.h2
                   className="text-3xl sm:text-4xl font-serif font-bold text-gray-800 mb-4"
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -727,7 +726,7 @@ export default function InvitePage() {
                 >
                   Venue & Contact
                 </motion.h2>
-                <motion.div 
+                <motion.div
                   className="w-20 h-1 bg-gradient-to-r from-gold to-gold-dark mx-auto rounded-full"
                   initial={{ scaleX: 0 }}
                   whileInView={{ scaleX: 1 }}
@@ -736,7 +735,7 @@ export default function InvitePage() {
                 />
               </ScrollSection>
 
-              <motion.div 
+              <motion.div
                 className="grid md:grid-cols-3 gap-6"
                 initial="hidden"
                 whileInView="visible"
@@ -757,7 +756,7 @@ export default function InvitePage() {
                     <p className="text-gray-600 font-medium">{eventDetails.venue}</p>
                     <p className="text-gray-500 text-sm mt-1">{eventDetails.address}</p>
                     <p className="text-gray-500 text-sm">{eventDetails.city}</p>
-                    <motion.a 
+                    <motion.a
                       href={eventDetails.mapLink}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -774,7 +773,7 @@ export default function InvitePage() {
                 <motion.div variants={scrollVariants.fadeRight}>
                   <InfoCard icon={Phone} title="Contact" delay={0}>
                     <div className="space-y-3">
-                      <motion.a 
+                      <motion.a
                         href={`tel:${eventDetails.phone1.replace(/\s/g, '')}`}
                         className="block text-gray-600 hover:text-gold-dark transition-colors"
                         whileHover={{ x: 5 }}
@@ -782,7 +781,7 @@ export default function InvitePage() {
                         <span className="font-medium block text-sm text-gray-500">{eventDetails.phone1Name}</span>
                         <span className="text-base">{eventDetails.phone1}</span>
                       </motion.a>
-                      <motion.a 
+                      <motion.a
                         href={`tel:${eventDetails.phone2.replace(/\s/g, '')}`}
                         className="block text-gray-600 hover:text-gold-dark transition-colors"
                         whileHover={{ x: 5 }}
@@ -800,11 +799,11 @@ export default function InvitePage() {
           {/* Final CTA Section */}
           <section className="relative py-24 bg-gradient-to-br from-gold-light via-sand-light to-gold-light overflow-hidden">
             <FloatingParticles />
-            
+
             <div className="relative z-10 max-w-3xl mx-auto px-4 text-center">
               <ScrollSection variant="scaleUp">
                 <motion.div
-                  animate={{ 
+                  animate={{
                     scale: [1, 1.15, 1],
                     rotate: [0, 5, -5, 0]
                   }}
@@ -814,9 +813,9 @@ export default function InvitePage() {
                   <Heart className="h-14 w-14 text-gold-dark mx-auto drop-shadow-lg" fill="currentColor" />
                 </motion.div>
               </ScrollSection>
-              
+
               <ScrollSection variant="fadeUp" delay={0.2}>
-                <motion.h2 
+                <motion.h2
                   className="text-3xl sm:text-4xl font-serif font-bold text-gray-800 mb-4"
                   initial={{ opacity: 0, y: 40 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -826,16 +825,16 @@ export default function InvitePage() {
                   We Can't Wait to See You!
                 </motion.h2>
               </ScrollSection>
-              
+
               <ScrollSection variant="fadeUp" delay={0.4}>
                 <p className="text-lg text-gray-600 max-w-xl mx-auto mb-8 font-serif">
-                  Your presence would make our celebration complete. 
+                  Your presence would make our celebration complete.
                   Let's create beautiful memories together!
                 </p>
               </ScrollSection>
 
               <ScrollSection variant="scaleUp" delay={0.6}>
-                <motion.div 
+                <motion.div
                   className="inline-flex items-center space-x-3 text-gold-dark bg-white/50 backdrop-blur-sm px-6 py-3 rounded-full shadow-lg"
                   whileHover={{ scale: 1.05, boxShadow: "0 10px 40px rgba(184, 144, 40, 0.3)" }}
                   transition={{ type: "spring", stiffness: 300 }}
@@ -860,7 +859,7 @@ export default function InvitePage() {
         </main>
 
         {/* Footer */}
-        <motion.footer 
+        <motion.footer
           className="bg-gold text-white py-8"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -868,18 +867,18 @@ export default function InvitePage() {
           transition={{ duration: 0.8 }}
         >
           <div className="max-w-5xl mx-auto px-4">
-            <motion.div 
+            <motion.div
               className="flex flex-col items-center"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               variants={staggerContainer}
             >
-              <motion.div 
+              <motion.div
                 className="flex justify-center space-x-4 mb-4"
                 variants={scrollVariants.fadeUp}
               >
-                <motion.a 
+                <motion.a
                   href={`tel:${eventDetails.phone1.replace(/\s/g, '')}`}
                   className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-all"
                   whileHover={{ scale: 1.15, rotate: 10, backgroundColor: "rgba(255,255,255,0.4)" }}
@@ -887,7 +886,7 @@ export default function InvitePage() {
                 >
                   <Phone className="h-5 w-5" />
                 </motion.a>
-                <motion.a 
+                <motion.a
                   href={eventDetails.mapLink}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -898,14 +897,14 @@ export default function InvitePage() {
                   <MapPin className="h-5 w-5" />
                 </motion.a>
               </motion.div>
-              
-              <motion.p 
+
+              <motion.p
                 className="text-white/90 text-sm"
                 variants={scrollVariants.fadeUp}
               >
                 © 2025 Vishal Sebastian & Family
               </motion.p>
-              <motion.p 
+              <motion.p
                 className="mt-1 text-white/70 text-sm"
                 variants={scrollVariants.fadeUp}
               >
