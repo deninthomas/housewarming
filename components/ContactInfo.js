@@ -21,7 +21,8 @@ export default function ContactInfo() {
                 {/* Date & Time */}
                 <ContactCard icon={Calendar} title="Date & Time">
                     <p className="text-gray-600 font-medium text-lg">December 21, 2025</p>
-                    <p className="text-gray-600 text-lg">06:00 PM Onwards</p>
+                    <p className="text-gray-600 text-lg">05:00 PM Onwards</p>
+                    <p className="text-gray-600 text-lg">Till 07:00 PM</p>
                 </ContactCard>
 
                 {/* Venue */}

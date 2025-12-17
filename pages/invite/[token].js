@@ -362,8 +362,8 @@ const ImageCarousel = ({ images }) => {
               key={index}
               onClick={() => setCurrentIndex(index)}
               className={`h-2 rounded-full transition-all duration-300 ${index === currentIndex
-                  ? 'bg-gold w-6'
-                  : 'bg-white/60 w-2 hover:bg-white'
+                ? 'bg-gold w-6'
+                : 'bg-white/60 w-2 hover:bg-white'
                 }`}
               whileHover={{ scale: 1.2 }}
               whileTap={{ scale: 0.9 }}
@@ -745,14 +745,15 @@ export default function InvitePage() {
                 viewport={{ once: true, margin: "-50px" }}
                 variants={staggerContainer}
               >
-                <motion.div variants={scrollVariants.fadeLeft}>
+                <motion.div variants={scrollVariants.fadeLeft} className="h-full">
                   <InfoCard icon={Calendar} title="Date & Time" delay={0}>
                     <p className="text-gray-600 text-lg">{eventDetails.date}</p>
-                    <p className="text-gray-600">{eventDetails.time}</p>
+                    <p className="text-gray-600 text-lg">{eventDetails.time}</p>
+                    <p className="text-gray-600 text-lg">Till 07:00 PM</p>
                   </InfoCard>
                 </motion.div>
 
-                <motion.div variants={scrollVariants.fadeUp}>
+                <motion.div variants={scrollVariants.fadeUp} className="h-full">
                   <InfoCard icon={MapPin} title="Venue" delay={0}>
                     <p className="text-gray-600 font-medium">{eventDetails.venue}</p>
                     <p className="text-gray-500 text-sm mt-1">{eventDetails.address}</p>
@@ -770,7 +771,7 @@ export default function InvitePage() {
                   </InfoCard>
                 </motion.div>
 
-                <motion.div variants={scrollVariants.fadeRight}>
+                <motion.div variants={scrollVariants.fadeRight} className="h-full">
                   <InfoCard icon={Phone} title="Contact" delay={0}>
                     <div className="space-y-3">
                       <motion.a

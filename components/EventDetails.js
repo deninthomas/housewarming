@@ -7,9 +7,9 @@ export default function EventDetails() {
                 <span className={styles.icon}>📅</span>
                 <span>December 31, 2025</span>
             </div>
-            <div className={styles.detailRow}>
-                <span className={styles.icon}>⏰</span>
-                <span>06:00 PM Onwards</span>
+            <div className="detailRow">
+                <span className="icon">⏰</span>
+                <span>05:00 PM Onwards</span>
             </div>
             <div className={styles.detailRow}>
                 <span className={styles.icon}>📍</span>
