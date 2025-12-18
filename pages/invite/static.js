@@ -1,7 +1,8 @@
 import { useEffect, useState, useCallback, useRef } from 'react';
 import Head from 'next/head';
 import { motion, AnimatePresence, useScroll, useTransform, useInView } from 'framer-motion';
-import { MapPin, Phone, Clock, Home, ArrowRight, Calendar, Heart, Star } from 'react-feather';
+import { MapPin, Phone, Clock, Home, ArrowRight, Calendar, Heart, Star, ChevronDown } from 'react-feather';
+import BlessingsForm from '../../components/BlessingsForm';
 
 // Scroll animation variants
 const scrollVariants = {
@@ -101,7 +102,7 @@ const carouselImages = [
   { src: '/uploads/pool.jpg', alt: 'Swimming Pool' },
 ];
 
-// Splash Screen Component (matching the main invite)
+// Splash Screen Component - Simple & Elegant
 const SplashScreen = ({ onComplete }) => {
   const [isVisible, setIsVisible] = useState(true);
 
@@ -123,53 +124,75 @@ const SplashScreen = ({ onComplete }) => {
           transition={{ duration: 0.5 }}
           className="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-gold-light via-sand-light to-gold overflow-hidden"
         >
-          {/* Decorative Elements */}
-          <div className="absolute top-0 left-0 w-64 h-64 bg-white/20 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-gold-dark/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
-
-          {/* Floating particles */}
-          {[...Array(15)].map((_, i) => (
+          {/* Soft background blurs */}
+          <div className="absolute top-0 left-0 w-72 h-72 bg-white/30 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+          <div className="absolute bottom-0 right-0 w-96 h-96 bg-gold-dark/15 rounded-full blur-3xl translate-x-1/3 translate-y-1/3" />
+          
+          {/* Floating golden stars */}
+          {[...Array(10)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute w-2 h-2 rounded-full bg-gold-dark/30"
+              className="absolute"
               style={{
                 top: `${Math.random() * 100}%`,
                 left: `${Math.random() * 100}%`,
+                fontSize: 12 + Math.random() * 10,
+                color: '#d4af37',
+                textShadow: '0 0 10px rgba(212, 175, 55, 0.5)',
               }}
               animate={{
-                y: [0, -20, 0],
-                opacity: [0.2, 0.5, 0.2],
+                opacity: [0.2, 0.6, 0.2],
+                scale: [0.8, 1.2, 0.8],
+                rotate: [0, 20, -20, 0],
               }}
               transition={{
-                duration: 2 + Math.random() * 1.5,
+                duration: 4 + Math.random() * 2,
                 repeat: Infinity,
-                delay: Math.random() * 1
+                delay: Math.random() * 3,
+                ease: "easeInOut"
               }}
-            />
+            >
+              ✦
+            </motion.div>
           ))}
 
+          {/* Main content */}
           <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
             className="text-center p-8 relative z-10"
           >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.6, type: "spring" }}
-              className="mb-6"
-            >
-              <span className="text-6xl md:text-8xl font-script text-gold-dark drop-shadow-sm block mb-2">
+            {/* "You Are Invited" - Slide up entrance */}
+            <div className="mb-6">
+              <motion.span
+                initial={{ y: 50, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ 
+                  duration: 0.8, 
+                  delay: 0.3,
+                  ease: [0.22, 1, 0.36, 1]
+                }}
+                className="text-6xl md:text-8xl font-script text-gold-dark drop-shadow-sm block py-2"
+              >
                 You Are Invited
-              </span>
-            </motion.div>
+              </motion.span>
+            </div>
 
+            {/* Animated divider line */}
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.6, duration: 0.5 }}
-              className="bg-white/60 backdrop-blur-sm py-4 px-8 rounded-lg border border-white/50 shadow-lg inline-block"
+              initial={{ scaleX: 0, opacity: 0 }}
+              animate={{ scaleX: 1, opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.9 }}
+              className="w-20 h-0.5 bg-gold-dark/50 mx-auto mb-6"
+            />
+
+            {/* Event card - Fade in */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 1.1 }}
+              className="bg-white/60 backdrop-blur-sm py-4 px-8 rounded-xl border border-white/50 shadow-lg inline-block"
             >
               <h1 className="text-2xl md:text-4xl font-serif text-gray-800 tracking-wide uppercase">
                 House Warming Ceremony
@@ -177,10 +200,11 @@ const SplashScreen = ({ onComplete }) => {
               <div className="w-16 h-0.5 bg-gold-dark mx-auto mt-3" />
             </motion.div>
 
+            {/* Tagline */}
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 1, duration: 0.5 }}
+              transition={{ delay: 1.6, duration: 0.6 }}
               className="mt-6 text-xl text-gray-700 font-serif italic"
             >
               Celebrating a new beginning
@@ -192,31 +216,155 @@ const SplashScreen = ({ onComplete }) => {
   );
 };
 
-// Floating particles component
-const FloatingParticles = ({ color = "gold-dark" }) => {
+// Golden stars floating component - for whole page
+const GoldenStars = ({ count = 15 }) => {
+  const stars = [...Array(count)].map((_, i) => ({
+    id: i,
+    size: 12 + Math.random() * 8,
+    left: Math.random() * 100,
+    duration: 8 + Math.random() * 6,
+    delay: Math.random() * 6,
+    swayAmount: 15 + Math.random() * 20,
+  }));
+
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {[...Array(25)].map((_, i) => (
+      {stars.map((s) => (
         <motion.div
-          key={i}
-          className={`absolute w-2 h-2 rounded-full bg-${color}/20`}
+          key={s.id}
+          className="absolute"
           style={{
-            top: `${Math.random() * 100}%`,
-            left: `${Math.random() * 100}%`,
+            left: `${s.left}%`,
+            top: -20,
+            fontSize: s.size,
+            color: '#d4af37',
+            textShadow: '0 0 10px rgba(212, 175, 55, 0.6)',
           }}
           animate={{
-            y: [0, -50, 0],
-            opacity: [0.1, 0.4, 0.1],
+            y: ['0%', '800%'],
+            x: [0, s.swayAmount, -s.swayAmount, 0],
+            opacity: [0, 0.8, 0.8, 0],
+            rotate: [0, 180, 360],
           }}
           transition={{
-            duration: 6 + Math.random() * 4,
+            duration: s.duration,
             repeat: Infinity,
-            ease: "easeInOut",
-            delay: Math.random() * 3
+            ease: "linear",
+            delay: s.delay,
+            times: [0, 0.1, 0.9, 1],
           }}
-        />
+        >
+          ✦
+        </motion.div>
       ))}
     </div>
+  );
+};
+
+// Festive sparkles for Christmas section
+const FestiveSparkles = ({ count = 15 }) => {
+  const sparkles = [...Array(count)].map((_, i) => ({
+    id: i,
+    size: 14 + Math.random() * 10,
+    top: Math.random() * 100,
+    left: Math.random() * 100,
+    duration: 2 + Math.random() * 2,
+    delay: Math.random() * 3,
+  }));
+
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {sparkles.map((s) => (
+        <motion.div
+          key={s.id}
+          className="absolute"
+          style={{
+            top: `${s.top}%`,
+            left: `${s.left}%`,
+            fontSize: s.size,
+            filter: 'drop-shadow(0 0 8px rgba(212, 175, 55, 0.7))',
+          }}
+          animate={{
+            opacity: [0, 1, 0],
+            scale: [0.5, 1.2, 0.5],
+          }}
+          transition={{
+            duration: s.duration,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: s.delay,
+          }}
+        >
+          ✨
+        </motion.div>
+      ))}
+    </div>
+  );
+};
+
+// Christmas lights
+const ChristmasLights = () => {
+  const colors = ['#d4af37', '#e8c547', '#c9a227', '#deb841'];
+  
+  return (
+    <>
+      {/* Top string of lights */}
+      <div className="absolute top-0 left-0 right-0 flex justify-between px-4">
+        {[...Array(10)].map((_, i) => (
+          <motion.div
+            key={`top-${i}`}
+            className="flex flex-col items-center"
+          >
+            <div className="w-px h-3 bg-gold-dark/40" />
+            <motion.div
+              className="w-3 h-4 rounded-full"
+              style={{
+                backgroundColor: colors[i % colors.length],
+                boxShadow: `0 0 8px ${colors[i % colors.length]}, 0 0 15px ${colors[i % colors.length]}50`,
+              }}
+              animate={{
+                opacity: [0.5, 1, 0.5],
+                scale: [0.9, 1.1, 0.9],
+              }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                delay: i * 0.15,
+                ease: "easeInOut",
+              }}
+            />
+          </motion.div>
+        ))}
+      </div>
+      {/* Bottom string of lights */}
+      <div className="absolute bottom-0 left-0 right-0 flex justify-between px-4">
+        {[...Array(10)].map((_, i) => (
+          <motion.div
+            key={`bottom-${i}`}
+            className="flex flex-col items-center"
+          >
+            <motion.div
+              className="w-3 h-4 rounded-full"
+              style={{
+                backgroundColor: colors[(i + 2) % colors.length],
+                boxShadow: `0 0 8px ${colors[(i + 2) % colors.length]}, 0 0 15px ${colors[(i + 2) % colors.length]}50`,
+              }}
+              animate={{
+                opacity: [0.5, 1, 0.5],
+                scale: [0.9, 1.1, 0.9],
+              }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                delay: i * 0.15 + 0.5,
+                ease: "easeInOut",
+              }}
+            />
+            <div className="w-px h-3 bg-gold-dark/40" />
+          </motion.div>
+        ))}
+      </div>
+    </>
   );
 };
 
@@ -438,8 +586,11 @@ const HeroSection = () => {
         style={{ y }}
       >
         <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url('/uploads/building.jpg')` }}
+          className="absolute inset-0 bg-cover bg-no-repeat"
+          style={{ 
+            backgroundImage: `url('/uploads/building.jpg')`,
+            backgroundPosition: '30% center'
+          }}
         />
         <motion.div
           className="absolute inset-0"
@@ -452,8 +603,8 @@ const HeroSection = () => {
         />
       </motion.div>
 
-      {/* Floating particles */}
-      <FloatingParticles />
+      {/* Golden stars */}
+      <GoldenStars />
 
       {/* Content */}
       <motion.div
@@ -484,76 +635,137 @@ const HeroSection = () => {
         </motion.div>
 
         {/* Welcome text - Animated reveal */}
-        <div className="mb-6 overflow-hidden">
-          <AnimatedText
-            text="You're Cordially Invited"
-            className="text-gold-dark text-lg sm:text-xl tracking-[0.2em] uppercase font-medium"
-            delay={0.4}
-          />
+        <div className="mb-4">
+          <motion.span
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="text-gold-dark text-lg sm:text-xl tracking-[0.15em] uppercase font-medium inline-block"
+          >
+            Welcome To Our
+          </motion.span>
         </div>
 
         {/* Main title */}
-        <motion.h1
-          className="text-4xl sm:text-6xl md:text-7xl font-serif font-bold mb-6 leading-tight"
+        <motion.div
+          className="mb-4"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
         >
-          <motion.span
-            className="block text-gold-dark"
+          <motion.h1
+            className="text-5xl sm:text-7xl md:text-8xl font-script leading-none"
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.3 }}
           >
-            House Warming
-          </motion.span>
+            <span className="bg-gradient-to-r from-gold-dark via-gold to-gold-dark bg-clip-text text-transparent drop-shadow-sm">
+              House Warming
+            </span>
+          </motion.h1>
+          <motion.div
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 0.6, delay: 0.9 }}
+            className="flex items-center justify-center gap-4 my-3"
+          >
+            <div className="w-16 sm:w-24 h-px bg-gradient-to-r from-transparent to-gold-dark" />
+            <Star className="w-4 h-4 text-gold-dark" />
+            <div className="w-16 sm:w-24 h-px bg-gradient-to-l from-transparent to-gold-dark" />
+          </motion.div>
           <motion.span
-            className="block text-gray-800 mt-2"
-            whileHover={{ scale: 1.02 }}
-            transition={{ duration: 0.3 }}
+            className="text-2xl sm:text-3xl md:text-4xl tracking-[0.3em] uppercase text-gray-700 font-light"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1, duration: 0.5 }}
           >
             Ceremony
           </motion.span>
-        </motion.h1>
+        </motion.div>
+
+        {/* Venue name */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="mb-6"
+        >
+          <span className="text-2xl sm:text-3xl font-script text-gray-700">
+            at Olive Ourania, <span className="text-gold-dark font-bold not-italic">10D</span>
+          </span>
+        </motion.div>
+
+        {/* Host name */}
+        <motion.p
+          className="text-xl sm:text-2xl font-script text-gold-dark mb-2"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.95 }}
+        >
+          Vishal Sebastian & Family
+        </motion.p>
 
         {/* Subtitle */}
         <motion.p
-          className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto mb-10 leading-relaxed font-serif italic"
+          className="text-base sm:text-lg text-gray-600 max-w-xl mx-auto mb-10 leading-relaxed font-serif"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
+          transition={{ duration: 0.8, delay: 1.05 }}
         >
-          Join us as we celebrate new beginnings and the joy of making a house our home
+          We're thrilled to share our joy with you as we step into our new home
         </motion.p>
 
         {/* Date badge */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
+          className="mb-6 sm:mb-8 flex justify-center"
+          initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 1 }}
-          whileHover={{ scale: 1.05 }}
-          className="inline-block"
+          transition={{ duration: 0.6, delay: 0.9 }}
         >
-          <div className="relative group">
-            <div className="absolute -inset-1 bg-gradient-to-r from-gold to-gold-dark rounded-full blur opacity-30 group-hover:opacity-50 transition duration-300" />
-            <div className="relative bg-gradient-to-r from-gold to-gold-dark px-8 py-4 rounded-full flex items-center space-x-3 shadow-xl">
-              <Calendar className="h-5 w-5 text-white" />
-              <span className="text-lg font-semibold text-white">{eventDetails.date}</span>
-              <span className="text-white">•</span>
-              <span className="text-white">{eventDetails.time}</span>
+          <motion.div 
+            className="bg-gradient-to-r from-gold to-gold-dark px-5 py-2.5 sm:px-6 sm:py-3 rounded-xl shadow-lg"
+            animate={{ scale: [1, 1.02, 1] }}
+            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+          >
+            <div className="flex items-center gap-2 sm:gap-3">
+              <Calendar className="h-4 w-4 sm:h-5 sm:w-5 text-white flex-shrink-0" />
+              <span className="text-sm sm:text-base font-semibold text-white whitespace-nowrap">{eventDetails.date}</span>
+              <span className="text-white/60">•</span>
+              <span className="text-sm sm:text-base text-white/90 whitespace-nowrap">{eventDetails.time}</span>
             </div>
-          </div>
+          </motion.div>
         </motion.div>
+
+        {/* Get Directions - Highlighted CTA */}
+        <motion.a
+          href={eventDetails.mapLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 text-gold-dark hover:text-white font-semibold text-sm sm:text-base transition-all px-5 py-2.5 sm:px-6 sm:py-3 rounded-full bg-white hover:bg-gold-dark border-2 border-gold/50 hover:border-gold-dark shadow-md hover:shadow-lg mb-8 sm:mb-10"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1.2 }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.98 }}
+        >
+          <MapPin className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
+          <span className="whitespace-nowrap">Get Directions</span>
+          <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 flex-shrink-0" />
+        </motion.a>
 
         {/* Scroll indicator */}
         <motion.div
-          className="absolute bottom-10 left-1/2 -translate-x-1/2"
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.4 }}
         >
-          <div className="flex flex-col items-center text-gold-dark/60">
-            <span className="text-sm tracking-wider mb-2">Scroll Down</span>
-            <ArrowRight className="h-5 w-5 rotate-90" />
-          </div>
+          <motion.div 
+            className="flex flex-col items-center cursor-pointer text-gold-dark/50 hover:text-gold-dark transition-colors"
+            animate={{ y: [0, 6, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            onClick={() => window.scrollBy({ top: window.innerHeight * 0.8, behavior: 'smooth' })}
+          >
+            <ChevronDown className="h-5 w-5" />
+          </motion.div>
         </motion.div>
       </motion.div>
     </motion.section>
@@ -604,23 +816,139 @@ export default function InvitePage() {
   }
 
   return (
-    <>
-      {showSplash && <SplashScreen onComplete={() => setShowSplash(false)} />}
+    <div className="min-h-screen bg-gradient-to-br from-gold-light via-sand-light to-gold-light">
+      <Head>
+        <title>House Warming Ceremony | You're Invited!</title>
+        <meta name="description" content="Join us as we celebrate our new home" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
 
-      <div className="min-h-screen bg-sand-light text-gray-800">
-        <Head>
-          <title>House Warming Ceremony | You're Invited!</title>
-          <meta name="description" content="Join us as we celebrate our new home" />
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
+      <AnimatePresence mode="wait">
+        {showSplash ? (
+          <SplashScreen key="splash" onComplete={() => setShowSplash(false)} />
+        ) : (
+          <motion.div 
+            key="main"
+            className="min-h-screen bg-sand-light text-gray-800"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6 }}
+          >
+            <main>
+              {/* Hero Section */}
+              <HeroSection />
 
-        <main>
-          {/* Hero Section */}
-          <HeroSection />
+          {/* Spacer with subtle decoration */}
+          <div className="relative py-8 bg-gradient-to-b from-sand-light to-gold-light/30">
+            <div className="flex items-center justify-center gap-4">
+              <div className="w-16 h-px bg-gradient-to-r from-transparent to-gold/40" />
+              <Star className="w-4 h-4 text-gold/50" />
+              <div className="w-16 h-px bg-gradient-to-l from-transparent to-gold/40" />
+            </div>
+          </div>
+
+          {/* Elegant Christmas Banner */}
+          <section className="relative py-16 bg-gradient-to-br from-gold-light via-sand-light to-gold-light overflow-hidden">
+            {/* Festive sparkles */}
+            <FestiveSparkles count={12} />
+            
+            {/* Christmas lights */}
+            <ChristmasLights />
+            
+            {/* Subtle gold accent lines */}
+            <div className="absolute inset-0 pointer-events-none">
+              <div className="absolute top-6 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold-dark to-transparent" />
+              <div className="absolute bottom-6 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold-dark to-transparent" />
+            </div>
+
+            {/* Corner decorations */}
+            <div className="absolute top-4 left-4 text-gold-dark/40 text-2xl">✦</div>
+            <div className="absolute top-4 right-4 text-gold-dark/40 text-2xl">✦</div>
+            <div className="absolute bottom-4 left-4 text-gold-dark/40 text-2xl">✦</div>
+            <div className="absolute bottom-4 right-4 text-gold-dark/40 text-2xl">✦</div>
+
+            <div className="relative z-10 max-w-3xl mx-auto px-6 text-center">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+                className="flex flex-col items-center"
+              >
+                {/* Elegant star */}
+                <motion.div 
+                  className="mb-6"
+                  animate={{ rotate: [0, 5, -5, 0], scale: [1, 1.05, 1] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <span className="text-5xl" style={{ filter: 'drop-shadow(0 0 15px rgba(212, 175, 55, 0.6))' }}>⭐</span>
+                </motion.div>
+
+                {/* Main greeting */}
+                <motion.h3
+                  className="text-4xl sm:text-5xl font-script mb-2"
+                  style={{ color: '#d4af37', textShadow: '0 0 20px rgba(212, 175, 55, 0.4)' }}
+                  initial={{ scale: 0.9, opacity: 0 }}
+                  whileInView={{ scale: 1, opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                >
+                  Advance Christmas
+                </motion.h3>
+                
+                <motion.span
+                  className="text-2xl sm:text-3xl font-script text-gold-dark/80 block mb-4"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3 }}
+                >
+                  Wishes ✨
+                </motion.span>
+
+                {/* Decorative line */}
+                <motion.div
+                  className="flex items-center gap-3 mb-5"
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                >
+                  <div className="w-16 h-px bg-gradient-to-r from-transparent to-gold-dark" />
+                  <span className="text-gold-dark">🎄</span>
+                  <div className="w-16 h-px bg-gradient-to-l from-transparent to-gold-dark" />
+                </motion.div>
+
+                {/* Message */}
+                <motion.p
+                  className="text-gray-700 text-lg sm:text-xl font-serif italic max-w-xl leading-relaxed"
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.5, duration: 0.6 }}
+                >
+                  Wishing you a joyful Christmas filled with love, 
+                  laughter, and the warmth of family & friends
+                </motion.p>
+
+                {/* Year badge */}
+                <motion.div
+                  className="mt-6 px-6 py-2 rounded-full border border-gold-dark/50 bg-white/50"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.7 }}
+                >
+                  <span className="text-gold-dark text-sm tracking-[0.2em] uppercase font-medium">
+                    🎁 Christmas 2025 🎁
+                  </span>
+                </motion.div>
+              </motion.div>
+            </div>
+          </section>
 
           {/* Countdown Section */}
           <section className="relative py-20 bg-white overflow-hidden">
-            <FloatingParticles />
 
             <div className="relative z-10 max-w-5xl mx-auto px-4">
               <ScrollSection variant="fadeDown" className="text-center mb-12">
@@ -659,7 +987,8 @@ export default function InvitePage() {
 
           {/* Image Gallery Section */}
           <section className="relative py-20 bg-sand-light overflow-hidden">
-            <div className="max-w-4xl mx-auto px-4">
+            
+            <div className="relative z-10 max-w-4xl mx-auto px-4">
               <ScrollSection variant="fadeUp" className="text-center mb-12">
                 <motion.span
                   className="text-gold-dark text-sm uppercase tracking-[0.2em] mb-4 block font-medium"
@@ -704,7 +1033,6 @@ export default function InvitePage() {
 
           {/* Venue & Contact Section */}
           <section className="relative py-20 bg-white overflow-hidden">
-            <FloatingParticles />
 
             <div className="relative z-10 max-w-5xl mx-auto px-4">
               <ScrollSection variant="fadeUp" className="text-center mb-12">
@@ -797,9 +1125,41 @@ export default function InvitePage() {
             </div>
           </section>
 
+          {/* Blessings Form Section */}
+          <section className="relative py-20 bg-sand-light overflow-hidden">
+            <GoldenStars count={10} />
+
+            <div className="relative z-10 max-w-2xl mx-auto px-4">
+              <ScrollSection variant="fadeUp" className="text-center mb-12">
+                <motion.span
+                  className="text-gold-dark text-sm uppercase tracking-[0.2em] mb-4 block font-medium"
+                >
+                  Share Your Wishes
+                </motion.span>
+                <motion.h2
+                  className="text-3xl sm:text-4xl font-serif font-bold text-gray-800 mb-2"
+                >
+                  Send Your Blessings
+                </motion.h2>
+                <motion.div
+                  className="w-20 h-1 bg-gradient-to-r from-gold to-gold-dark mx-auto rounded-full"
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: 0.3 }}
+                />
+              </ScrollSection>
+
+              <ScrollSection variant="scaleUp" delay={0.2}>
+                <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl border border-gold-light/50 p-6 sm:p-8">
+                  <BlessingsForm />
+                </div>
+              </ScrollSection>
+            </div>
+          </section>
+
           {/* Final CTA Section */}
           <section className="relative py-24 bg-gradient-to-br from-gold-light via-sand-light to-gold-light overflow-hidden">
-            <FloatingParticles />
 
             <div className="relative z-10 max-w-3xl mx-auto px-4 text-center">
               <ScrollSection variant="scaleUp">
@@ -914,7 +1274,9 @@ export default function InvitePage() {
             </motion.div>
           </div>
         </motion.footer>
-      </div>
-    </>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   );
 }
