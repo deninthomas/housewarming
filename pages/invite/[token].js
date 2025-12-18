@@ -1125,7 +1125,7 @@ export default function InvitePage() {
                   <InfoCard icon={Calendar} title="Date & Time" delay={0}>
                     <p className="text-gray-600 text-base sm:text-lg font-medium">{eventDetails.date}</p>
                     <p className="text-gray-600 text-sm sm:text-base">{eventDetails.time}</p>
-                    <p className="text-gray-500 text-sm">Till 07:00 PM</p>
+                    <p className="text-gray-500 text-sm">Till 11:00 PM</p>
                   </InfoCard>
                 </motion.div>
 
