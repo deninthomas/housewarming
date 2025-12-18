@@ -95,7 +95,7 @@ export default function AdminVishal() {
 
     const shareOnWhatsApp = (name, token) => {
         const link = `${window.location.origin}/invite/${token}`;
-        const message = `Greetings ${name},%0A%0APlease join us for our House Warming Ceremony!%0A%0AOpen your invite here:%0A${link}%0A%0A`;
+        const message = `We are delighted to invite you all to our house warming ceremony 🎉✨%0A%0APlease see the invitation here 📩👇%0A${link}%0A%0A Seeking your valuable presence %0A%0AThank you all, and we look forward to meeting you soon %0A%0ARegards,%0AVishal Sebastian and Family`;
         window.open(`https://wa.me/?text=${message}`, '_blank');
     };
 
