@@ -684,32 +684,38 @@ const HeroSection = ({ guestName, customGreeting }) => {
             whileHover={{ scale: 1.02 }}
           >
             <span className="bg-gradient-to-r from-gold-dark via-gold to-gold-dark bg-clip-text text-transparent drop-shadow-sm">
-              House Warming Ceremony
+              House Warming
             </span>
           </motion.h1>
+          <motion.div
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 0.6, delay: 0.95 }}
+            className="flex items-center justify-center gap-3 sm:gap-4 my-2 sm:my-3"
+          >
+            <div className="w-12 sm:w-20 h-px bg-gradient-to-r from-transparent to-gold-dark" />
+            <Star className="w-3 h-3 sm:w-4 sm:h-4 text-gold-dark" />
+            <div className="w-12 sm:w-20 h-px bg-gradient-to-l from-transparent to-gold-dark" />
+          </motion.div>
+          <motion.span
+            className="text-2xl sm:text-3xl md:text-4xl tracking-[0.2em] sm:tracking-[0.3em] uppercase text-gray-700 font-light"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.05, duration: 0.5 }}
+          >
+            Ceremony
+          </motion.span>
         </motion.div>
 
         {/* Venue name */}
         <motion.p
-          className="text-xl sm:text-2xl font-script text-gray-600 mb-6"
+          className="text-xl sm:text-2xl font-script text-gray-600 mb-5"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.8 }}
         >
           Olive Ourania, <span className="text-gold-dark font-bold">10D</span>
         </motion.p>
-
-        {/* Decorative divider */}
-        <motion.div
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{ duration: 0.6, delay: 0.95 }}
-          className="flex items-center justify-center gap-4 mb-6"
-        >
-          <div className="w-16 sm:w-24 h-px bg-gradient-to-r from-transparent to-gold-dark" />
-          <Star className="w-4 h-4 text-gold-dark" />
-          <div className="w-16 sm:w-24 h-px bg-gradient-to-l from-transparent to-gold-dark" />
-        </motion.div>
 
         {customGreeting && (
           <motion.div
