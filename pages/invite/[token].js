@@ -618,44 +618,74 @@ const HeroSection = ({ guestName, customGreeting }) => {
           </motion.div>
         </motion.div>
 
-        <div className="mb-6 overflow-hidden">
-          <AnimatedText
-            text="You're Cordially Invited"
-            className="text-gold-dark text-lg sm:text-xl tracking-[0.2em] uppercase font-medium"
-            delay={0.4}
-          />
+        {/* Welcome text - Animated reveal */}
+        <div className="mb-4">
+          <motion.span
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="text-gold-dark text-lg sm:text-xl tracking-[0.15em] uppercase font-medium inline-block"
+          >
+            Welcome To Our
+          </motion.span>
         </div>
 
-        <motion.h1
-          className="text-4xl sm:text-6xl md:text-7xl font-serif font-bold mb-6 leading-tight"
+        {/* Main title */}
+        <motion.div
+          className="mb-4"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
         >
-          <motion.span
-            className="block text-gold-dark"
+          <motion.h1
+            className="text-5xl sm:text-7xl md:text-8xl font-script leading-none"
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.3 }}
           >
-            House Warming
-          </motion.span>
+            <span className="bg-gradient-to-r from-gold-dark via-gold to-gold-dark bg-clip-text text-transparent drop-shadow-sm">
+              House Warming
+            </span>
+          </motion.h1>
+          <motion.div
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 0.6, delay: 0.9 }}
+            className="flex items-center justify-center gap-4 my-3"
+          >
+            <div className="w-16 sm:w-24 h-px bg-gradient-to-r from-transparent to-gold-dark" />
+            <Star className="w-4 h-4 text-gold-dark" />
+            <div className="w-16 sm:w-24 h-px bg-gradient-to-l from-transparent to-gold-dark" />
+          </motion.div>
           <motion.span
-            className="block text-gray-800 mt-2"
-            whileHover={{ scale: 1.02 }}
-            transition={{ duration: 0.3 }}
+            className="text-2xl sm:text-3xl md:text-4xl tracking-[0.3em] uppercase text-gray-700 font-light"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1, duration: 0.5 }}
           >
             Ceremony
           </motion.span>
-        </motion.h1>
+        </motion.div>
+
+        {/* Venue name */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="mb-4"
+        >
+          <span className="text-2xl sm:text-3xl font-script text-gray-700">
+            at Olive Ourania, <span className="text-gold-dark font-bold not-italic">10D</span>
+          </span>
+        </motion.div>
 
         {/* Personalized greeting */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
-          className="mb-6"
+          transition={{ duration: 0.8, delay: 0.9 }}
+          className="mb-4"
         >
-          <p className="text-2xl sm:text-3xl text-gray-700 font-script">
+          <p className="text-2xl sm:text-3xl text-gold-dark font-script">
             Dear {guestName}
           </p>
         </motion.div>
@@ -665,7 +695,7 @@ const HeroSection = ({ guestName, customGreeting }) => {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 1 }}
-            className="bg-white/70 backdrop-blur-sm border border-gold-light p-4 rounded-xl mb-8 max-w-lg mx-auto shadow-lg"
+            className="bg-white/70 backdrop-blur-sm border border-gold-light p-4 rounded-xl mb-6 max-w-lg mx-auto shadow-lg"
           >
             <p className="text-gold-dark font-serif italic text-lg">"{customGreeting}"</p>
           </motion.div>
@@ -681,13 +711,14 @@ const HeroSection = ({ guestName, customGreeting }) => {
           Vishal Sebastian & Family
         </motion.p>
 
+        {/* Subtitle */}
         <motion.p
-          className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto mb-10 leading-relaxed font-serif italic"
+          className="text-base sm:text-lg text-gray-600 max-w-xl mx-auto mb-10 leading-relaxed font-serif"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.2 }}
+          transition={{ duration: 0.8, delay: 1.15 }}
         >
-          Join us as we celebrate new beginnings and the joy of making a house our home
+          We're thrilled to share our joy with you as we step into our new home
         </motion.p>
 
         {/* Date badge */}
