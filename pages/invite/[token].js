@@ -395,25 +395,35 @@ const Countdown = ({ targetDate }) => {
   const TimeBlock = ({ value, label }) => (
     <div className="flex flex-col items-center">
       <div className="relative group cursor-default">
+        {/* Hover glow */}
         <div className="absolute -inset-2 bg-gold/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-        <div className="relative w-20 h-24 sm:w-24 sm:h-28 bg-white rounded-2xl shadow-lg border border-gold-light/40 flex items-center justify-center overflow-hidden group-hover:border-gold/60 transition-colors duration-300">
+
+        {/* Main card */}
+        <div className="relative w-16 h-20 sm:w-24 sm:h-28 bg-white rounded-xl sm:rounded-2xl shadow-lg border border-gold-light/40 flex items-center justify-center overflow-hidden group-hover:border-gold/60 transition-colors duration-300">
+          {/* Top shine */}
           <div className="absolute top-0 left-0 right-0 h-1/2 bg-gradient-to-b from-gold-light/10 to-transparent" />
-          <span className="relative text-4xl sm:text-5xl font-bold text-gold-dark tabular-nums">
+
+          {/* Number */}
+          <span className="relative text-3xl sm:text-5xl font-bold text-gold-dark tabular-nums">
             {String(value).padStart(2, '0')}
           </span>
+
+          {/* Bottom shadow line */}
           <div className="absolute bottom-0 left-2 right-2 h-px bg-gradient-to-r from-transparent via-gold/20 to-transparent" />
         </div>
       </div>
-      <span className="mt-3 text-xs sm:text-sm font-semibold text-gold-dark uppercase tracking-[0.15em]">
+
+      {/* Label */}
+      <span className="mt-2 sm:mt-3 text-[10px] sm:text-sm font-semibold text-gold-dark uppercase tracking-[0.1em] sm:tracking-[0.15em]">
         {label}
       </span>
     </div>
   );
 
   const Colon = () => (
-    <div className="flex flex-col items-center justify-center gap-3 mx-2 sm:mx-4 mt-8 sm:mt-10">
-      <div className="w-2 h-2 rounded-full bg-gold-dark/60" />
-      <div className="w-2 h-2 rounded-full bg-gold-dark/60" />
+    <div className="flex flex-col items-center justify-center gap-2 sm:gap-3 mx-1 sm:mx-4 mt-6 sm:mt-10">
+      <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-gold-dark/60" />
+      <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-gold-dark/60" />
     </div>
   );
 
@@ -597,97 +607,108 @@ const HeroSection = ({ guestName, customGreeting }) => {
         style={{ opacity }}
       >
         <motion.div
-          className="mb-8"
+          className="mb-5"
           initial={{ scale: 0, rotate: -180 }}
           animate={{ scale: 1, rotate: 0 }}
           transition={{ type: 'spring', stiffness: 100, delay: 0.2 }}
         >
           <motion.div
             className="relative inline-block"
-            animate={{ y: [0, -8, 0] }}
+            animate={{ y: [0, -5, 0] }}
             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
           >
             <motion.div
-              className="absolute -inset-4 bg-gold/30 rounded-full blur-xl"
+              className="absolute -inset-3 bg-gold/30 rounded-full blur-lg"
               animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
               transition={{ duration: 2, repeat: Infinity }}
             />
-            <div className="relative bg-gradient-to-br from-gold to-gold-dark p-5 rounded-2xl shadow-xl">
-              <Home className="h-10 w-10 sm:h-12 sm:w-12 text-white" strokeWidth={1.5} />
+            <div className="relative bg-gradient-to-br from-gold to-gold-dark p-3 sm:p-4 rounded-xl shadow-lg">
+              <Home className="h-7 w-7 sm:h-8 sm:w-8 text-white" strokeWidth={1.5} />
             </div>
           </motion.div>
         </motion.div>
 
-        {/* Personalized greeting - First thing they see */}
-        <motion.div
+        {/* Personalized greeting */}
+        <motion.p
+          className="text-2xl sm:text-3xl text-gold-dark font-script mb-3"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.35 }}
-          className="mb-4"
         >
-          <p className="text-2xl sm:text-3xl text-gold-dark font-script">
-            Dear {guestName}
-          </p>
-        </motion.div>
+          Dear {guestName}
+        </motion.p>
+
+        {/* Host name */}
+        <motion.p
+          className="text-2xl sm:text-3xl font-script text-gold-dark mb-2"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.45 }}
+        >
+          Vishal Sebastian & Family
+        </motion.p>
 
         {/* Welcome text */}
-        <div className="mb-4">
-          <motion.span
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.45 }}
-            className="text-gold-dark text-lg sm:text-xl tracking-[0.15em] uppercase font-medium inline-block"
-          >
-            Welcome To Our
-          </motion.span>
-        </div>
+        <motion.span
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.55 }}
+          className="text-gray-600 text-lg sm:text-xl font-script block mb-3"
+        >
+          welcomes you to our
+        </motion.span>
 
         {/* Main title */}
         <motion.div
-          className="mb-4"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
+          className="mb-4 relative"
+          initial={{ opacity: 0, y: 30, scale: 0.9 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 1, delay: 0.65, type: "spring", stiffness: 100 }}
         >
+          {/* Subtle glow behind title */}
+          <motion.div
+            className="absolute inset-0 bg-gold/20 blur-3xl rounded-full"
+            animate={{ opacity: [0.3, 0.5, 0.3], scale: [0.9, 1.1, 0.9] }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+          />
           <motion.h1
-            className="text-5xl sm:text-7xl md:text-8xl font-script leading-none"
+            className="relative text-4xl sm:text-6xl md:text-7xl font-script leading-none"
+            animate={{ 
+              textShadow: [
+                "0 0 20px rgba(212, 175, 55, 0)",
+                "0 0 40px rgba(212, 175, 55, 0.3)",
+                "0 0 20px rgba(212, 175, 55, 0)"
+              ]
+            }}
+            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
             whileHover={{ scale: 1.02 }}
-            transition={{ duration: 0.3 }}
           >
             <span className="bg-gradient-to-r from-gold-dark via-gold to-gold-dark bg-clip-text text-transparent drop-shadow-sm">
-              House Warming
+              House Warming Ceremony
             </span>
           </motion.h1>
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 0.6, delay: 0.9 }}
-            className="flex items-center justify-center gap-4 my-3"
-          >
-            <div className="w-16 sm:w-24 h-px bg-gradient-to-r from-transparent to-gold-dark" />
-            <Star className="w-4 h-4 text-gold-dark" />
-            <div className="w-16 sm:w-24 h-px bg-gradient-to-l from-transparent to-gold-dark" />
-          </motion.div>
-          <motion.span
-            className="text-2xl sm:text-3xl md:text-4xl tracking-[0.3em] uppercase text-gray-700 font-light"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1, duration: 0.5 }}
-          >
-            Ceremony
-          </motion.span>
         </motion.div>
 
         {/* Venue name */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
+        <motion.p
+          className="text-xl sm:text-2xl font-script text-gray-600 mb-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.8 }}
-          className="mb-6"
         >
-          <span className="text-2xl sm:text-3xl font-script text-gray-700">
-            at Olive Ourania, <span className="text-gold-dark font-bold not-italic">10D</span>
-          </span>
+          Olive Ourania, <span className="text-gold-dark font-bold">10D</span>
+        </motion.p>
+
+        {/* Decorative divider */}
+        <motion.div
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 0.6, delay: 0.95 }}
+          className="flex items-center justify-center gap-4 mb-6"
+        >
+          <div className="w-16 sm:w-24 h-px bg-gradient-to-r from-transparent to-gold-dark" />
+          <Star className="w-4 h-4 text-gold-dark" />
+          <div className="w-16 sm:w-24 h-px bg-gradient-to-l from-transparent to-gold-dark" />
         </motion.div>
 
         {customGreeting && (
@@ -701,22 +722,12 @@ const HeroSection = ({ guestName, customGreeting }) => {
           </motion.div>
         )}
 
-        {/* Host name */}
-        <motion.p
-          className="text-xl sm:text-2xl font-script text-gold-dark mb-2"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.1 }}
-        >
-          Vishal Sebastian & Family
-        </motion.p>
-
         {/* Subtitle */}
         <motion.p
-          className="text-base sm:text-lg text-gray-600 max-w-xl mx-auto mb-10 leading-relaxed font-serif"
+          className="text-base sm:text-lg text-gray-600 max-w-xl mx-auto mb-8 leading-relaxed font-serif"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.15 }}
+          transition={{ duration: 0.8, delay: 1.05 }}
         >
           We're thrilled to share our joy with you as we step into our new home
         </motion.p>
@@ -789,16 +800,16 @@ const InfoCard = ({ icon: Icon, title, children, delay = 0 }) => (
     transition={{ duration: 0.6, delay }}
     whileHover={{ y: -5, transition: { duration: 0.3 } }}
   >
-    <div className="absolute -inset-1 bg-gradient-to-r from-gold to-gold-dark rounded-2xl blur opacity-10 group-hover:opacity-25 transition duration-500" />
-    <div className="relative bg-white p-8 rounded-2xl border border-gold-light shadow-lg h-full">
+    <div className="absolute -inset-1 bg-gradient-to-r from-gold to-gold-dark rounded-xl sm:rounded-2xl blur opacity-10 group-hover:opacity-25 transition duration-500" />
+    <div className="relative bg-white p-5 sm:p-8 rounded-xl sm:rounded-2xl border border-gold-light shadow-lg h-full">
       <motion.div
-        className="w-14 h-14 rounded-full bg-gold-light flex items-center justify-center mb-5"
+        className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-gold-light flex items-center justify-center mb-3 sm:mb-5"
         whileHover={{ rotate: 10, scale: 1.1 }}
         transition={{ type: 'spring', stiffness: 300, damping: 15 }}
       >
-        <Icon className="h-6 w-6 text-gold-dark" />
+        <Icon className="h-5 w-5 sm:h-6 sm:w-6 text-gold-dark" />
       </motion.div>
-      <h3 className="text-xl font-bold text-gray-800 mb-3">{title}</h3>
+      <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-2 sm:mb-3">{title}</h3>
       {children}
     </div>
   </motion.div>
@@ -1103,50 +1114,53 @@ export default function InvitePage() {
                 viewport={{ once: true, margin: "-50px" }}
                 variants={staggerContainer}
               >
+                {/* Date & Time Card */}
                 <motion.div variants={scrollVariants.fadeLeft} className="h-full">
                   <InfoCard icon={Calendar} title="Date & Time" delay={0}>
-                    <p className="text-gray-600 text-lg">{eventDetails.date}</p>
-                    <p className="text-gray-600 text-lg">{eventDetails.time}</p>
-                    <p className="text-gray-600 text-lg">Till 07:00 PM</p>
+                    <p className="text-gray-600 text-base sm:text-lg font-medium">{eventDetails.date}</p>
+                    <p className="text-gray-600 text-sm sm:text-base">{eventDetails.time}</p>
+                    <p className="text-gray-500 text-sm">Till 07:00 PM</p>
                   </InfoCard>
                 </motion.div>
 
+                {/* Venue Card */}
                 <motion.div variants={scrollVariants.fadeUp} className="h-full">
                   <InfoCard icon={MapPin} title="Venue" delay={0}>
-                    <p className="text-gray-600 font-medium">{eventDetails.venue}</p>
-                    <p className="text-gray-500 text-sm mt-1">{eventDetails.address}</p>
-                    <p className="text-gray-500 text-sm">{eventDetails.city}</p>
+                    <p className="text-gray-600 font-medium text-sm sm:text-base">{eventDetails.venue}</p>
+                    <p className="text-gray-500 text-xs sm:text-sm mt-1">{eventDetails.address}</p>
+                    <p className="text-gray-500 text-xs sm:text-sm">{eventDetails.city}</p>
                     <motion.a
                       href={eventDetails.mapLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center text-gold-dark hover:text-gold transition-colors font-medium mt-3 text-sm"
+                      className="inline-flex items-center text-gold-dark hover:text-gold transition-colors font-medium mt-2 sm:mt-3 text-xs sm:text-sm"
                       whileHover={{ x: 5, scale: 1.02 }}
                     >
                       Get Directions
-                      <ArrowRight className="ml-1 h-4 w-4" />
+                      <ArrowRight className="ml-1 h-3 w-3 sm:h-4 sm:w-4" />
                     </motion.a>
                   </InfoCard>
                 </motion.div>
 
+                {/* Contact Card */}
                 <motion.div variants={scrollVariants.fadeRight} className="h-full">
                   <InfoCard icon={Phone} title="Contact" delay={0}>
-                    <div className="space-y-3">
+                    <div className="space-y-2 sm:space-y-3">
                       <motion.a
                         href={`tel:${eventDetails.phone1.replace(/\s/g, '')}`}
                         className="block text-gray-600 hover:text-gold-dark transition-colors"
                         whileHover={{ x: 5 }}
                       >
-                        <span className="font-medium block text-sm text-gray-500">{eventDetails.phone1Name}</span>
-                        <span className="text-base">{eventDetails.phone1}</span>
+                        <span className="font-medium block text-xs sm:text-sm text-gray-500">{eventDetails.phone1Name}</span>
+                        <span className="text-sm sm:text-base">{eventDetails.phone1}</span>
                       </motion.a>
                       <motion.a
                         href={`tel:${eventDetails.phone2.replace(/\s/g, '')}`}
                         className="block text-gray-600 hover:text-gold-dark transition-colors"
                         whileHover={{ x: 5 }}
                       >
-                        <span className="font-medium block text-sm text-gray-500">{eventDetails.phone2Name}</span>
-                        <span className="text-base">{eventDetails.phone2}</span>
+                        <span className="font-medium block text-xs sm:text-sm text-gray-500">{eventDetails.phone2Name}</span>
+                        <span className="text-sm sm:text-base">{eventDetails.phone2}</span>
                       </motion.a>
                     </div>
                   </InfoCard>
