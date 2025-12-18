@@ -618,12 +618,24 @@ const HeroSection = ({ guestName, customGreeting }) => {
           </motion.div>
         </motion.div>
 
-        {/* Welcome text - Animated reveal */}
+        {/* Personalized greeting - First thing they see */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.35 }}
+          className="mb-4"
+        >
+          <p className="text-2xl sm:text-3xl text-gold-dark font-script">
+            Dear {guestName}
+          </p>
+        </motion.div>
+
+        {/* Welcome text */}
         <div className="mb-4">
           <motion.span
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            transition={{ duration: 0.6, delay: 0.45 }}
             className="text-gold-dark text-lg sm:text-xl tracking-[0.15em] uppercase font-medium inline-block"
           >
             Welcome To Our
@@ -671,23 +683,11 @@ const HeroSection = ({ guestName, customGreeting }) => {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.8 }}
-          className="mb-4"
+          className="mb-6"
         >
           <span className="text-2xl sm:text-3xl font-script text-gray-700">
             at Olive Ourania, <span className="text-gold-dark font-bold not-italic">10D</span>
           </span>
-        </motion.div>
-
-        {/* Personalized greeting */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.9 }}
-          className="mb-4"
-        >
-          <p className="text-2xl sm:text-3xl text-gold-dark font-script">
-            Dear {guestName}
-          </p>
         </motion.div>
 
         {customGreeting && (
